@@ -1,196 +1,850 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+<html lang="en">
+  <head>
+  <title>Bii</title>
+  <meta charset="utf-8" />
+  <meta name="referrer" content="never">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="script/ajax.js"> </script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./script/jquery.lazyload.js"></script>
+  <link rel="stylesheet" href="./css/gitment.css">
+<script src="./script/gitment.js"></script>
+  <script type="text/javascript" >
+  function locate(){
+    if ($(window).scrollTop() == 0){
+      window.scrollTo(0,1);
+    }
+    $(function() {
+      $("div.lazyload").lazyload();
+    });
 
-  
-  <title>Hello World | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/03/10/hello-world/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-10T12:33:12.503Z">
-<meta property="article:modified_time" content="2020-03-10T12:33:12.503Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  }
 
-<meta name="generator" content="Hexo 4.2.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  function Entry(id,type, cover, title, address, position){
+    this.id = id;
+    this.type = type;
+    this.cover = cover;
+    this.title = title;
+    this.address = address;
+    this.position = position;
+
+    this.toHTML = function(){
+      var blogHTML = "";
+      if (this.type == 1){
+        blogHTML += '<div class="pick pick1" id="entry'+this.id+'"onmouseover = "getback(this);" onclick="changewidth(); tuozhan(this); ">'+
+          '<div class="pickframe">'+
+            '<span class="close blades thick" id="close'+this.id+'" onclick="tuozhanclick(this); setTimeout(changewidth,1050);setTimeout(changewidth,1300)"></span>'+
+            '<div class="lazyload pickcover pickcover1" style="background-image: url(./icon/side1.png)"; data-original="'+this.cover+'"></div>'+
+            '<div class="pickinfo pickinfo1">'+
+            '<div class="pickinfo1_1"></div>'+
+            '<div class="pickinfo1_2">'+this.title+'</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>';
+      } else{
+        blogHTML += '<div class="pick pick2" id="entry'+this.id+'"onmouseover = "getback(this);" onclick=" changewidth(); tuozhan(this);">'+
+          '<div class="pickframe">'+
+            '<span class="close blades thick" id="close'+this.id+'" onclick="tuozhanclick(this); setTimeout(changewidth,1050);setTimeout(changewidth,1300)"></span>'+
+            '<div class="lazyload pickcover pickcover2" style="background-image: url(./icon/side1.png)"; data-original="'+this.cover+'"></div>'+
+            '<div class="pickinfo pickinfo2">'+
+            '<div class="pickinfo2_1"></div>'+
+            '<div class="pickinfo2_2">'+this.title+'</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>';
+        }
+      return blogHTML;
+    }
+  }
+
+    var backbody = [];
+
+    var Entry1 = new Entry(1,1,'./img/entry1.jpg','改革开放：什么是40年最重要的事？','articles/entry1.html');
+    var Entry2 = new Entry(2,2,'./img/entry2.jpg','东京地铁沙林事件','articles/entry2.html');
+    var Entry3 = new Entry(3,2,'./img/entry3.gif','土耳其严控大学言论','articles/entry3.html');
+    var Entry4 = new Entry(4,1,'./img/entry4.jpg','迷妹','articles/entry4.html',"0px 35%");
+    var Entry5 = new Entry(5,2,'./img/entry5.jpg','香港语言之争','articles/entry5.html');
+    var Entry6 = new Entry(6,1,'./img/entry6.jpg','可可可可','articles/entry6.html','40% 35%');
+    var Entry7 = new Entry(7,2,'./img/entry7.jpg','巴西国家博物馆大火','articles/entry7.html');
+    var Entry8 = new Entry(8,2,'./img/entry8.jpg','挪威恐袭','articles/entry8.html','40% 10%');
+var Entry9 = new Entry(9,2,'./img/entry9.jpg','日本寺院网红标语','articles/entry9.html','');
+var Entry10 = new Entry(10,2,'./img/entry10.jpg','福州：老教堂的新颜色','articles/entry10.html','');
+var Entry11 = new Entry(11,2,'./img/entry11.jpg','树木希林逝世','articles/entry11.html','');
+var Entry12 = new Entry(12,1,'./img/entry12.jpg','上海：四川北路','articles/entry12.html','');
+var Entry13 = new Entry(13,2,'./img/entry13.jpg','可口可乐乌龙营销','articles/entry13.html','');
+var Entry14 = new Entry(14,2,'./img/entry14.jpg','香港：李太报摊','articles/entry14.html','');
+var Entry15 = new Entry(15,1,'./img/entry15.jpg','范美忠：地震十年','articles/entry15.html','');
+var Entry16 = new Entry(16,2,'./img/entry16.jpg','乌镇：大幕拉开','articles/entry16.html','');
+var Entry17 = new Entry(17,2,'./img/entry17.jpg','令人作呕食物博物馆','articles/entry17.html','70% 25%');
+var Entry18 = new Entry(18,2,'./img/entry18.jpg','地球最后的夜晚','articles/entry18.html','40% 30%');
+var Entry19 = new Entry(19,1,'./img/entry19.jpg','上海：报亭的最后一晚','articles/entry19.html','');
+var Entry20 = new Entry(20,2,'./img/entry20.jpg','里斯本葡式碎石路','articles/entry20.html','40% 10%');
+var Entry21 = new Entry(21,2,'./img/entry21.jpg','平如美棠译本获奖','articles/entry21.html','40% 30%');
+var Entry22 = new Entry(22,1,'./img/entry22.jpg','北京：莫测的生活','articles/entry22.html','');
+var Entry23 = new Entry(23,2,'./img/entry23.jpg','村上图书馆','articles/entry23.html','');
+var Entry24 = new Entry(24,1,'./img/entry24.jpg','成都：日企温室','articles/entry24.html','');
+var Entry25 = new Entry(25,2,'./img/entry25.jpg','致大家','articles/entry25.html','40% 10%');
+var Entry26 = new Entry(26,2,'./img/entry26.jpg','明尼苏达实验城市','articles/entry26.html','');
+var Entry27 = new Entry(27,2,'./img/entry27.jpg','《东京客》','articles/entry27.html','');
+var Entry28 = new Entry(28,1,'./img/entry28.jpg','王占黑：街道英雄','articles/entry28.html','');
+var Entry29 = new Entry(29,2,'./img/entry29.jpg','香港：另类天堂','articles/entry29.html','40% 80%');
+var Entry30 = new Entry(30,2,'./img/entry30.jpg','英国王妃的美国税','articles/entry30.html','40% 30%');
+var Entry31 = new Entry(31,2,'./img/entry31.jpg','MH370：搜寻终结','articles/entry31.html','');
+var Entry32 = new Entry(32,1,'./img/entry32.jpg','欢迎来到萨拉热窝','articles/entry32.html','40% 10%');
+var Entry33 = new Entry(33,2,'./img/entry33.png','重新开张','articles/entry33.html','40% 50%');
+var Entry34 = new Entry(34,2,'./img/entry34.jpg','海防道的牛腩面','articles/entry34.html','');
+var Entry35 = new Entry(35,1,'./img/entry35.jpeg','泰国之旅','articles/entry35.html','');
+var Entry36 = new Entry(36,2,'./img/entry36.jpg','年度国家：亚美尼亚','articles/entry36.html','40% 60%');
+var Entry37 = new Entry(37,2,'./img/entry37.jpg','Hakuna Matata','articles/entry37.html','');
+var Entry38 = new Entry(38,2,'./img/entry38.jpg','日本：地铁扶梯新规','articles/entry38.html','40% 33%');
+var Entry39 = new Entry(39,1,'./img/entry39.jpg','《台风天》','articles/entry39.html','20% 20%');
+
+    backbody.push(Entry1);
+    backbody.push(Entry2);
+    backbody.push(Entry3);
+    backbody.push(Entry4);
+    backbody.push(Entry5);
+    backbody.push(Entry6);
+    backbody.push(Entry7);
+    backbody.push(Entry8);
+backbody.push(Entry9);
+backbody.push(Entry10);
+backbody.push(Entry11);
+backbody.push(Entry12);
+backbody.push(Entry13);
+backbody.push(Entry14);
+backbody.push(Entry15);
+backbody.push(Entry16);
+backbody.push(Entry17);
+backbody.push(Entry18);
+backbody.push(Entry19);
+backbody.push(Entry20);
+backbody.push(Entry21);
+backbody.push(Entry22);
+backbody.push(Entry23);
+backbody.push(Entry24);
+backbody.push(Entry25);
+backbody.push(Entry26);
+backbody.push(Entry27);
+backbody.push(Entry28);
+backbody.push(Entry29);
+backbody.push(Entry30);
+backbody.push(Entry31);
+backbody.push(Entry32);
+backbody.push(Entry33);
+backbody.push(Entry34);
+backbody.push(Entry35);
+backbody.push(Entry36);
+backbody.push(Entry37);
+backbody.push(Entry38);
+backbody.push(Entry39);
+
+    var i = 0, checklist = [];
+    while (i < backbody.length-1) {
+      if (backbody[i].type == 1) {
+        checklist.push(backbody[i]);
+      }
+      i++;
+    }
+
+    function showEntry(){
+      var i = backbody.length-1, entryListHTML = "";
+      while (i > -1) {
+        entryListHTML += backbody[i].toHTML();
+        i--;
+      }
+    document.getElementById("back").innerHTML = entryListHTML;
+  }
+
+  function changewidth() {
+    var i = checklist.length - 1;
+    while (i > -1){
+      var brother = document.getElementById("entry"+(checklist[i].id + 1));
+      var benzun = document.getElementById("entry"+(checklist[i].id));
+      var check = back.clientWidth- brother.offsetWidth - brother.offsetLeft;
+      if (check == 225){
+      benzun.style.width = "210px";
+      $("#entry"+checklist[i].id+"> .pickframe > .pickinfo").addClass('pickinfo13').removeClass('pickinfo');
+      } else {
+      benzun.style.width = "430px";
+      $("#entry"+checklist[i].id+"> .pickframe > .pickinfo13").addClass('pickinfo').removeClass('pickinfo13');
+      }
+      i--;
+    }
+  }
+
+  var status = 0;
+  var tuozhanId= 0;
+  function tuozhan(item) {
+    var Id = (item.id).split('entry')[1];
+    tuozhanId = Id;
+    var topp = document.getElementById(item.id).offsetTop;
+    var leftt = document.getElementById(item.id).offsetLeft;
+    $(item).addClass("pick3").removeClass("pick");
+    document.getElementById(item.id).style.top = topp -10 + "px";
+    document.getElementById(item.id).style.left = leftt -10 + "px";
+    var index = (item.id).split('entry')[1] - 1;
+    var clearr = document.getElementById(item.id).firstChild.childNodes;
+    $(item).addClass("pick4");
+    $("#back").css("overflow","visible");
+    $(clearr[1]).css("padding-bottom","var(--height)");
+    $(clearr[2]).css("display","none");
+    document.getElementById(item.id).style.top = $(window).scrollTop() + "px";
+    document.getElementById(item.id).style.left = 0 + "px";
+    $("#"+ item.id + "> .pickframe >.close").css("visibility","visible");
+    if (backbody[index].position != null) {
+      $("#"+ item.id + "> .pickframe > .pickcover").css("background-position",backbody[index].position);
+    }
+    $(item).removeAttr("onclick");
+    $(item).css("height","auto");
+    var mengban = document.createElement("div");
+    mengban.id = "mengban";
+    document.getElementById("back").appendChild(mengban);
+    $('#mengban').attr("onclick","tuozhanclickMengban();guiwei();setTimeout(changewidth,1050);setTimeout(changewidth,1300);");
+    var intro = document.createElement("div");
+    intro.id = "intro";
+    intro.innerHTML = backbody[index].title;
+    var article = document.createElement("div");
+    article.id = "article";
+    $.ajax({
+      url:backbody[index].address,
+      type:'get',
+      success:function(res){
+          $('#article').html($(res));
+      }
+  });
+    var thisdiv = document.getElementById(item.id);
+    thisdiv.appendChild(intro);
+    thisdiv.appendChild(article);
+    status = 1;
+  }
+
+  function tuozhanclick(item){
+    document.getElementById("back").removeChild(document.getElementById("mengban"));
+    var blockId = "entry" + (item.id).split('close')[1];
+    var getback = document.getElementById(blockId).firstChild.childNodes;
+    if (backbody[(item.id).split('close')[1] - 1].type == 1){
+      $(getback[1]).css("padding-bottom","var(--height)")
+    } else {
+      $(getback[1]).css("padding-bottom","calc(var(--height)*0.75)")
+    }
+    $(getback[2]).css("display","block");
+    var thisBlock = document.getElementById(blockId);
+    thisBlock.removeChild(document.getElementById("intro"));
+    thisBlock.removeChild(document.getElementById("article"));
+    $("#"+blockId).addClass("pick").removeClass("pick4").removeClass("pick3");
+    $(item).css("visibility","hidden");
+    $("#"+blockId).css("top","");
+    $("#"+blockId).css("left","");
+    status = 0;
+    }
+
+  function tuozhanclickMengban(){
+    document.getElementById("back").removeChild(document.getElementById("mengban"));
+    var blockId = "entry" + tuozhanId;
+    var getback = document.getElementById(blockId).firstChild.childNodes;
+    if (backbody[tuozhanId - 1].type == 1){
+      $(getback[1]).css("padding-bottom","var(--height)")
+    } else {
+      $(getback[1]).css("padding-bottom","calc(var(--height)*0.75)")
+    }
+    $(getback[2]).css("display","block");
+    var thisBlock = document.getElementById(blockId);
+    thisBlock.removeChild(document.getElementById("intro"));
+    thisBlock.removeChild(document.getElementById("article"));
+    $("#"+blockId).addClass("pick").removeClass("pick4").removeClass("pick3");
+    $("#"+blockId).css("top","");
+    $("#"+blockId).css("left","");
+    $("#close"+tuozhanId).css("visibility","hidden");
+    status = 0;
+  }
+
+  function getback(item){
+    if (status == 0){
+    $(item).attr("onclick","tuozhan(this); changewidth();");
+    }
+  }
+
+  function guiwei(){
+    $('html, body').animate({scrollTop: $("#entry"+tuozhanId).offset().top}, 0.5)
+    //window.location.hash = "#entry"+tuozhanId;
+  }
+
+  function sidepush() {
+    if (document.getElementById("fuzhu").style.display == "none") {
+      $("#bianlan").addClass("bianlan2").removeClass("bianlan1");
+      document.getElementById("sideicon").src = "./icon/side2.png";
+      document.getElementById("fuzhu").style.display = "inline";
+    } else {
+      $("#bianlan").addClass("bianlan1").removeClass("bianlan2");
+      document.getElementById("sideicon").src = "./icon/side1.png";
+      document.getElementById("fuzhu").style.display = "none";
+    }
+  }
+
+  function dianji(){
+    document.body.addEventListener('touchstart', function () { });
+  }
+
+  </script>
+  <style type='text/css'>
+  :root{
+  --width: 210px;
+  --height: 280px;
+}
+  body{ margin: 0px;
+        font-family: Arial,Hiragino Sans GB,冬青黑,Microsoft YaHei,微软雅黑,SimSun,宋体,Helvetica,Tahoma,Arial sans-serif;}
+  ul {
+    padding:0;
+    margin-top: 2px;
+  }
+  li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    list-style:none;
+  }
+  li.side {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+  }
+  li.main:hover{
+    background-color: rgba(0,0,0,0.7);
+    transition:background-color 0.5s linear;
+  }
+  li.side:hover{
+    color: rgba(255,255,255,0.7);
+    transition:color 0.2s linear;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:visited{
+    color: white;
+  }
+  a.article{
+    color: rgba(255,204,51,1);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255,204,51,1);
+  }
+  a.article:visited{
+    color: rgba(255,204,51,1);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255,204,51,1);
+  }
+  #dinglan {
+    position: fixed;
+    top: 0px;
+    background-color: rgba(0,0,0,0.95);
+    width: 100%;
+    height: 45px;
+    z-index: 99;
+  }
+  #wenzi {
+    position:         absolute;
+    bottom:           8px;
+    right:            0px;
+    left:             0px;
+    font-family:      Times;
+    font-size:        26px;
+    font-weight: normal;
+    color: white;
+    text-align: center;
+  }
+  #back{
+      position: relative;
+      margin: 65px auto 0;
+      overflow:hidden;
+      transition: width 0.6s;
+      }
+  @media screen and (min-width: 480px) and (max-width: 700px) {
+    #back{
+          width: 440px;
+        }
+    }
+  @media screen and (min-width: 700px) and (max-width: 920px) {
+    #back{
+         width: 660px;
+        }
+    }
+  @media screen and (min-width:920px) and (max-width: 1140px) {
+    #back{
+          width: 880px;
+        }
+    }
+  @media screen and (min-width: 1140px) and (max-width: 1360px) {
+    #back{
+          width: 1100px;
+        }
+    }
+  @media screen and (min-width: 1360px) and (max-width: 1580px) {
+    #back{
+          width: 1320px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+      #back{
+            width: 270px;
+          }
+      :root{
+        --width: 260px;
+        --height: 340px;
+      }
+      .pick1{
+        width: var(--width) !important;
+        height: var(--height);
+      }
+      .pick2{
+        width: var(--width);
+        height: var(--height);
+      }
+      .pickinfo1_1{
+        margin-top: 12px;
+        margin-left: 5%;
+        margin-right: 240px;
+        height: 0px;
+        transition: all 1.5s;
+        color: white;
+        border-top: 3px solid;
+      }
+      .pick:hover > .pickframe > .pickinfo1 > .pickinfo1_1 {
+        margin-right: 160px;
+      }
+
+      .pick:active{
+        box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+      }
+      .pick:active > .pickframe > .pickcover {
+        transform: scale(1.1);
+      }
+      .pick:active > .pickframe > .pickinfo2 {
+        height: calc(var(--height)*0.3131);
+      }
+      .pick:active > .pickframe > .pickinfo1 > .pickinfo1_1 {
+        margin-right: 160px;
+      }
+      .pick:active > .pickframe > .pickinfo2 > .pickinfo2_1 {
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+    }
+
+
+  .pick {
+    float: left;
+    border-radius: 5px;
+    background-color: white;
+    margin: 10px 5px 10px 5px;
+    height: var(--height);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+  .pick1{
+    width: calc(var(--width)*2 + 10px);
+  }
+  .pick2{
+    width: var(--width);
+  }
+  .pick3{
+    position: absolute;
+    border-radius: 5px;
+    background-color: white;
+    margin: 10px 5px 10px 5px;
+    z-index: 5;
+    transition: top 1.3s,left 0.7s,width 0.7s,height 0.5s;
+    box-shadow: -4px 12px 12px rgba(0,0,0,0.2);
+  }
+  .pick4{
+    width: 100% !important;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  @media screen and (max-width: 480px) and (min-width: 340px){
+    .pick4{
+      width: 330px !important;
+      margin-left: -30px;
+      margin-right: -30px;
+    }
+  }
+  @media screen and (max-width: 340px){
+    .pick4{
+      width: 290px !important;
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+  .pick:hover{
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+  }
+  .pick:hover > .pickframe > .pickcover {
+    transform: scale(1.1);
+  }
+  .pick:hover > .pickframe > .pickinfo13 {
+    height: calc(var(--height)*0.34);
+  }
+  .pick:hover > .pickframe > .pickinfo2 {
+    height: calc(var(--height)*0.3131);
+  }
+  .pick:hover > .pickframe > .pickinfo1 > .pickinfo1_1 {
+    margin-right: 50%;
+  }
+  .pick:hover > .pickframe > .pickinfo2 > .pickinfo2_1 {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .pickframe{
+    position: relative;
+    width: 100%;
+    height: var(--height);
+  }
+  .pickcover{
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    background-size: cover;
+    background-position:center;
+    transition: all 1s, padding 0.7s;
+  }
+  .pickcover1{
+    padding-bottom: var(--height);
+  }
+  .pickcover2{
+    padding-bottom: calc(var(--height)*0.75);
+  }
+  .pickinfo{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: calc(var(--height)*0.2424);
+    transition: height 0.5s;
+    z-index: 2;
+    background: white;
+  }
+  .pickinfo13{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: calc(var(--height)*0.2424);
+    transition: height 0.5s;
+    z-index: 2;
+    background: white;
+  }
+  .pickinfo1{
+    background: rgba(0,0,0,0.6);
+  }
+  .pickinfo2{
+    background: white;
+  }
+  .pickinfo1_1{
+    margin-top: 12px;
+    margin-left: 5%;
+    margin-right: 75%;
+    height: 0px;
+    transition: all 1.5s;
+    color: white;
+    border-top: 3px solid;
+  }
+  .pickinfo2_1{
+    margin-top: 12px;
+    margin-left: 40%;
+    margin-right: 40%;
+    height: 0px;
+    transition: all 1.5s;
+    color: rgba(0,0,0,1);
+    border-top: 3px solid;
+  }
+  .pickinfo1_2{
+    margin-top: 10px;
+    margin-left: 5%;
+    font-size: 19px;
+    line-height: 36px;
+    color: white;
+  }
+  .pickinfo2_2{
+    margin-top: 12px;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+    font-size: 19px;
+    color: rgba(0,0,0,0.6);
+  }
+
+  #intro {
+    margin-top: 35px;
+    margin-bottom: 50px;
+    margin-left: 15%;
+    font-size: 30px;
+  }
+  @media screen and (max-width: 480px) {
+    #intro {
+      margin-top: 35px;
+      margin-bottom: 50px;
+      margin-left: 10%;
+      font-size: 30px;
+    }
+  }
+@media screen and (min-width: 480px) and (max-width: 700px) {
+  #intro {
+    margin-top: 35px;
+    margin-bottom: 50px;
+    margin-left: 10%;
+    font-size: 30px;
+  }
+}
+
+  #article {
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 18px;
+    font-family: "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    line-height: 1.8;
+  }
+  #abstract {
+    margin-bottom: 50px;
+    font-size: 20px;
+    color: rgba(0,0,0,0.3);
+    text-align: center;
+    font-family: Arial,Hiragino Sans GB,冬青黑,Microsoft YaHei,微软雅黑,SimSun,宋体,Helvetica,Tahoma,Arial sans-serif;
+  }
+  #abstract::before, #abstract::after {
+    content: '';
+      display: inline-block;
+      border: 1px solid rgba(0,0,0,0.3);
+      width: 15px;
+      vertical-align: middle;
+      margin-right: 4px;
+}
+  @media screen and (max-width: 480px) {
+    #article {
+      margin-left: 10%;
+      margin-right: 10%;
+      font-size: 18px;
+      font-family: "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+      text-align: justify;
+      text-justify: inter-ideograph;
+    }
+    .gitment-editor-header{
+      font-size: 10px;
+    }
+    .gitment-editor-tab{
+      font-size: 10px;
+    }
+  }
+  @media screen and (min-width: 480px) and (max-width: 700px) {
+    #article {
+      margin-left: 10%;
+      margin-right: 10%;
+      font-size: 18px;
+      font-family: "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+      text-align: justify;
+      text-justify: inter-ideograph;
+    }
+  }
+  p.first:first-letter {
+    font-size: 40px;
+  }
+  p.img {
+    color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    text-align: center;
+  }
+  p.start {
+    text-align: center;
+    width: 30px;
+    border-bottom: 2px solid #000;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  div.toComment {
+    position: absolute;
+    right: 10px;
+  }
+  @media screen and (min-width: 480px) {
+    div.toComment {
+      right: 20px;
+    }
+  }
+  @media screen and (min-width: 700px) {
+    div.toComment {
+      right: 60px;
+    }
+  }
+  p.end {
+    text-align: center;
+    width: 30px;
+    border-bottom: 2px solid #000;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  img.main{
+    width: 100%
+  }
+  iframe.main{
+    height: calc(var(--height)*1.5);
+    width: 100%
+  }
+  @media screen and (max-width: 700px) {
+    iframe.main{
+      height: var(--height);
+      width: 100%
+    }
+  }
+
+  #mengban {
+    width: 100%;
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 4;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
+  .close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    visibility: hidden;
+  }
+  @media screen and (max-width: 480px) and (min-width: 340px){
+    .close {
+      position: absolute;
+      top: -15px;
+      right: 150px;
+      width: 30px;
+      height: 30px;
+      visibility: hidden;
+    }
+  }
+  @media screen and (max-width: 340px) {
+    .close {
+      position: absolute;
+      top: -15px;
+      right: 130px;
+      width: 30px;
+      height: 30px;
+      visibility: hidden;
+    }
+  }
+  .close:hover::before, .close:hover::after {
+  background: #CCFFFF;
+  }
+  .close::before, .close::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  margin-top: -1px;
+  background: #000;
+  z-index: 4;
+}
+.close::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.close::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.close.blades::before, .close.blades::after {
+  border-radius: 5px 0;
+}
+.close.thick::before, .close.thick::after {
+  height: 4px;
+  margin-top: -2px;
+}
+
+
+
+  #side {
+    position:         absolute;
+    bottom:           8px;
+    top:              8px;
+    left:             15px;
+    font-size:        26px;
+    text-align: center;
+  }
+  #bianlan {
+    position: fixed;
+    top: 45px;
+    background-color: rgba(0,0,0,0.9);
+    width: 240px;
+    height: 100%;
+    z-index: 6;
+    transition:left 0.5s;
+    -moz-transition:left 0.5s; /* Firefox 4 */
+    -webkit-transition:left 0.5s; /* Safari and Chrome */
+    -o-transition:left 0.5s;
+  }
+  .bianlan1 {
+    left: -240px;
+  }
+  .bianlan2 {
+    left: 0px;
+  }
+  #sidelist {
+    position: absolute;
+    color: white;
+    top: 10px;
+    left: 0px;
+    right: 0px;
+    font-size: 20px;
+    text-align: center;
+  }
+  #list {
+    position: fixed;
+    color: white;
+    top: 28%;
+    left: 30%;
+    right: 30%;
+    margin-top: 300px;
+    font-size: 20px;
+    text-align: center;
+  }
+  </style>
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body onload="dianji(); showEntry(); changewidth(); locate();" onresize="setTimeout(changewidth,1050);setTimeout(changewidth,1050)" onscroll="locate();">
+
+    <div id = 'dinglan'>
+      <span id = 'wenzi'>
+        <a class="nav" href="./index.html">BiiHug</a>
+      </span>
+      <span id="side">
+        <img id = "sideicon" src="./icon/side1.png" onclick="sidepush();">
+        <img id = "fuzhu" style="display: none"></img>
+      </span>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+    <div id="back">
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/10/hello-world/" class="article-date">
-  <time datetime="2020-03-10T12:33:12.503Z" itemprop="datePublished">2020-03-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Hello World
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/hello-world/" data-id="ck7reoxnm0000t5s69amx91c2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/03/10/hello-world/">Hello World</a>
-          </li>
-        
+    <div id="bianlan" class="bianlan1">
+      <ul id="sidelist">
+        <li class="side"><a href="./userIndex/user_index.html">个人主页</a></li>
+        <li class="side"><a href="./userIndex/info_index.html">消息</a></li>
       </ul>
     </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
+  </body>
 </html>
